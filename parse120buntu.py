@@ -1,39 +1,182 @@
 import feedparser
 import re
+import scribus
+import random
+import HTMLParser
 
-# get custom RSS feed with category 6 #distro
-python_wiki_rss_url = "http://120buntu.com/wp/?feed=rss2&cat=6"
-feed = feedparser.parse(python_wiki_rss_url)
+####################################################################################
+# general page layouts
+####################################################################################
+left_page_x = 12
+document_width = 231.8
+document_height = 184.2
+document_margin = 3
+
+####################################################################################
+# get custom RSS feed and create a dictionary of {'distroname':'description'} 
+####################################################################################
+def getdistrofeed(distroamount):
+	python_wiki_rss_url = "http://120buntu.com/wp/?feed=rss2&cat=6"
+	feed = feedparser.parse(python_wiki_rss_url)	
+	f = feed['entries']
+	l = len(f)
+	distros = {}
+	enough=0
+
+	for post in f:
+		content = post.summary
+		# remove all links and remove all img tags
+		content = re.sub('<a href=".*</a>', "", content)
+		content = re.sub('<img.*/>', "", content)
+		content = re.sub('<p></p>', "", content)
+		content = re.sub('^\s+$|\n', "", content)
+		title = post.title
+		distros[title] = content
+		if enough > distroamount:
+			break
+		enough+=1
+	return distros
+
+####################################################################################
+# create 3mm bleed markers on every page
+####################################################################################
+def setbleeds():
+	scribus.setHGuides([3,228.8])
+	scribus.setVGuides([3,181.2])
+
+
+####################################################################################
+# create random elements (ubuntu bar/circles) for background
+####################################################################################
+def placerandom(iteration):
+	for i in range(iteration):
+		imagedir = "./elements/"
+		random_x = random.randint(-20,int(document_width))
+		random_y = random.randint(-20,int(document_height))
+		randomsize_x = random.randint(30,50)
+
+		circles = scribus.createImage(random_x, random_y, randomsize_x,randomsize_x)
+		scribus.loadImage(imagedir + "ubuntu_circle.png", circles)
+		scribus.setScaleImageToFrame(1,1,circles)
+
+		random_degree = random.randint(0,180)
+		scribus.rotateObject(random_degree, circles)
+
+		scribus.sentToLayer("randomcircles", circles)
+
+def placerandom_bars(iteration):
+	for i in range(iteration):
+		imagedir = "./elements/"
+		random_x = random.randint(0,int(document_width))
+		random_y = random.randint(0,int(document_height))
+		randomsize_x = random.randint(100,105)
+		randomsize_y = random.randint(50,50)
 	
-f = feed['entries']
-l = len(f)
+		bars = scribus.createImage(random_x, random_y, randomsize_x, randomsize_y)
+		scribus.loadImage(imagedir + "ubuntu_bar.png", bars)
+		scribus.setScaleImageToFrame(1,1,bars)
+	
+		i = random.randint(0,2)
+		if i == 0:
+			random_degree = 0
+		elif i == 1:
+			random_degree = 120
+		elif i == 2:
+			random_degree = 240	
 
-text = """
-</strong></p>
-<p><img class="alignnone size-full wp-image-204" title="header_lowresbuntu" src="http://120buntu.com/wp/wp-content/uploads/2011/02/header_lowresbuntu.jpg" alt="" width="976" height="400" /></p>
-<p><strong>Lowresbuntu</strong> is a system to be installed on your smart phone! Well, not really.. it&#8217;s rather a simulation of a GUI (graphical us
-<a href="http://120buntu.com/wp/wp-content/uploads/2011/08/file-2.ogv" rel="facebox"><img class="alignnone size-full wp-image-261" title="vuvubuntu_ss" src="http://120buntu.com/wp/wp-content/uploads/2011/08/vuvubuntu_ss.jpg" alt="" width="600" height="427" /></a>Experience an Ubuntu operating system augmented by an endless stream of vuvuzela drone-music (loud monotone; usually the below middle C). Trying to turn down the volume will make it even more louder. Unmuting the audio will immediately be reverted and there&#8217;s absolutely no way of stopping the computer vuvu-ing. Vuvubuntu comes pre-installed with a South-African GTK-theme to ensure that every user feels visually related to the home country of the
-"""
+		scribus.rotateObject(random_degree, bars)
+		scribus.sentToLayer("randombars", bars)
 
-#m = re.search('(<a href=".*</a>)(.*)',re.IGNORECASE)
-# remove all links and remove all img tags
-text = re.sub('<a href=".*</a>', "", text)
-text = re.sub('<img.*/>', "", text)
-#print text
-distros = {}
-i=1
-for post in f:
-	content = post.summary
-	content = re.sub('<a href=".*</a>', "", content)
-	content = re.sub('<img.*/>', "", content)
-	content = re.sub('<p></p>', "", content)
-	content = re.sub('^\s+$|\n', "", content)
-	title = post.title
-#m = re.match('<p>(.*)</p>\n<p>(.*)',content)
-#	print m.group(2)
-	print content
-	print
-	distros[title] = content
+
+
+####################################################################################
+# load RSS feed into dictionary
+####################################################################################
+distros = getdistrofeed(1)
+
+####################################################################################
+# create new document (landscape) 
+####################################################################################
+
+if scribus.newDocument((document_width,document_height), (document_margin,document_margin,document_margin,document_margin), scribus.PORTRAIT, 1, scribus.UNIT_MILLIMETERS, scribus.PAGE_2, 1, 1):
+	# create front page
+	B = scribus.createText(left_page_x, 10, 200, 100)
+	scribus.setFont("Gentium Plus Compact Regular", B)
+	scribus.setText("front cover", B)
+	scribus.setTextAlignment(scribus.ALIGN_LEFT, B)
+	scribus.setFontSize(40, B)
+
+ 	# create some layers; so objects appear front/background
+	scribus.createLayer("randombars")
+	scribus.createLayer("randomcircles")
+	scribus.createLayer("textlayer")
+
+
+	for distro in distros:
+		description = distros[distro]
+		# create new page && set bleeds
+		scribus.newPage(-1)
+		setbleeds()
+
+		# create page title/header
+		B = scribus.createText(left_page_x, 10, 100, 10)
+		scribus.setFont("Gentium Plus Compact Regular", B)
+		scribus.setText(distro, B)
+		scribus.setTextAlignment(scribus.ALIGN_LEFT, B)
+		scribus.setFontSize(18, B)
+		scribus.sentToLayer("textlayer", B)
+		
+		# load small-logo into page
+		imagedir = "./logos/"
+		f = scribus.createImage(left_page_x, 23, 65, 65)
+		scribus.loadImage(imagedir + distro + ".png", f)
+		scribus.setScaleImageToFrame(1,1,f)
+		scribus.sentToLayer("textlayer", f)
+
+		# get description text for each distro
+		A = scribus.createText(left_page_x, 95, 120, 80)
+		scribus.setText(description, A)
+		scribus.setFont("Gentium Plus Compact Regular", A)
+		scribus.setTextAlignment(scribus.ALIGN_LEFT, A)
+		scribus.setFontSize(10, A)
+		scribus.sentToLayer("textlayer", A)
+
+		placerandom(2)
+		placerandom_bars(3)
+
+		metadata = """Modified packages: gnome-screensaver, gnome-border-control, awesome, plymouth-splash-screen
+
+md5:
+alfdjflakjsdf203u2ofj2ojf2ojfj2o3jf2o3jo2j3f2o3j2f232
+
+filesize:
+200MB
+	"""
+		# show metadata for each distro
+		C = scribus.createText(left_page_x+150, 95, 60, 80)
+		scribus.setText(metadata, C)
+		scribus.setFont("Gentium Plus Compact Regular", C)
+		scribus.setTextAlignment(scribus.ALIGN_LEFT, C)
+		scribus.setFontSize(10, C)
+		scribus.sentToLayer("textlayer", C)
+
+		# create new page
+		scribus.newPage(-1)
+		setbleeds()
+
+		# load images into page
+		imagedir = "./screenshots/"
+		f = scribus.createImage(left_page_x, 23, 213, 152)
+		if os.path.isfile(imagedir + distro + ".png"):
+			scribus.loadImage(imagedir + distro + ".png", f)
+		else:
+			scribus.loadImage(imagedir + "test.jpg", f)
+		scribus.setScaleImageToFrame(1,1,f)
+
+
+# final // save doc && export PDF
+#scribus.saveDoc()
+#scribus.closeDoc()
 #for key, value in sorted(distros.iteritems(), key=lambda (k,v): (v,k)):
 #	print "DISTRO: %s:" % (key)
 #	print "VALUE: %s:" % (value)

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg3187"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   width="885.82672"
+   height="885.82672"
+   sodipodi:docname="Ubuntu_original.svg">
+  <metadata
+     id="metadata3193">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3191">
+    <foreignObject
+       requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+       x="0"
+       y="0"
+       width="1"
+       height="1"
+       id="foreignObject8">
+      <i:pgfRef
+         xlink:href="#adobe_illustrator_pgf" />
+    </foreignObject>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1171"
+     inkscape:window-height="772"
+     id="namedview3189"
+     showgrid="false"
+     inkscape:zoom="0.3346056"
+     inkscape:cx="346.90677"
+     inkscape:cy="305.42391"
+     inkscape:window-x="26"
+     inkscape:window-y="5"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g3989"
+     units="mm"
+     inkscape:object-paths="true" />
+  <g
+     id="g3989"
+     transform="translate(0,492.82675)">
+    <path
+       style="fill:#f2f2f2"
+       d="m 319.19383,65.580824 c 84.02135,0 153.73222,62.389246 165.27674,143.274866 l 115.60793,0 C 594.82763,145.29795 568.47713,86.059234 524.42157,39.341264 c -28.21419,14.36964 -62.90692,14.64327 -92.37837,-2.36659 -29.49363,-17.03206 -46.60703,-47.23567 -48.24886,-78.88881 -20.93692,-4.88109 -42.56904,-7.41039 -64.60051,-7.41039 -42.18447,0 -82.94899,9.20752 -120.0231,26.66852 l 57.87792,100.24728 c 19.22115,-7.73579 40.19505,-12.01045 62.14518,-12.01045 z"
+       id="path3270"
+       inkscape:connector-curvature="0" />
+    <g
+       style="fill:#000000"
+       id="g27"
+       transform="matrix(7.3955944,0,0,7.3955944,93.530194,-461.0086)" />
+  </g>
+</svg>
