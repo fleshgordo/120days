@@ -2,7 +2,7 @@ import feedparser
 import re
 import scribus
 import random
-import HTMLParser
+#from BeautifulSoup import BeautifulSoup
 
 ####################################################################################
 # general page layouts
@@ -12,6 +12,19 @@ document_width = 231.8
 document_height = 184.2
 document_margin = 3
 
+def remove_html_tags(data):
+	p = re.compile(r'<.*?>')
+	return p.sub('', data)
+
+
+def decode_unicode_references(data):
+	return re.sub("&#(\d+)(;|(?=\s))", _callback, data)
+def _callback(matches):
+	id = matches.group(1)
+	try:
+		return unichr(int(id))
+	except:
+		return id
 ####################################################################################
 # get custom RSS feed and create a dictionary of {'distroname':'description'} 
 ####################################################################################
@@ -31,7 +44,9 @@ def getdistrofeed(distroamount):
 		content = re.sub('<p></p>', "", content)
 		content = re.sub('^\s+$|\n', "", content)
 		title = post.title
-		distros[title] = content
+		content = decode_unicode_references(content)
+		distros[title] = remove_html_tags(content)
+#"<div id=" + title + ">" + content +"</div>"
 		if enough > distroamount:
 			break
 		enough+=1
@@ -92,7 +107,7 @@ def placerandom_bars(iteration):
 ####################################################################################
 # load RSS feed into dictionary
 ####################################################################################
-distros = getdistrofeed(1)
+distros = getdistrofeed(19)
 
 ####################################################################################
 # create new document (landscape) 
@@ -112,66 +127,66 @@ if scribus.newDocument((document_width,document_height), (document_margin,docume
 	scribus.createLayer("textlayer")
 
 
-	for distro in distros:
-		description = distros[distro]
-		# create new page && set bleeds
-		scribus.newPage(-1)
-		setbleeds()
+for distro in distros:
+	description = distros[distro]
+	# create new page && set bleeds
+	scribus.newPage(-1)
+	setbleeds()
 
-		# create page title/header
-		B = scribus.createText(left_page_x, 10, 100, 10)
-		scribus.setFont("Gentium Plus Compact Regular", B)
-		scribus.setText(distro, B)
-		scribus.setTextAlignment(scribus.ALIGN_LEFT, B)
-		scribus.setFontSize(18, B)
-		scribus.sentToLayer("textlayer", B)
-		
-		# load small-logo into page
-		imagedir = "./logos/"
-		f = scribus.createImage(left_page_x, 23, 65, 65)
-		scribus.loadImage(imagedir + distro + ".png", f)
-		scribus.setScaleImageToFrame(1,1,f)
-		scribus.sentToLayer("textlayer", f)
+	# create page title/header
+	B = scribus.createText(left_page_x, 10, 100, 10)
+	scribus.setFont("Gentium Plus Compact Regular", B)
+	scribus.setText(distro, B)
+	scribus.setTextAlignment(scribus.ALIGN_LEFT, B)
+	scribus.setFontSize(18, B)
+	scribus.sentToLayer("textlayer", B)
+	
+	# load small-logo into page
+	imagedir = "./logos/"
+	f = scribus.createImage(left_page_x, 23, 65, 65)
+	scribus.loadImage(imagedir + distro + ".png", f)
+	scribus.setScaleImageToFrame(1,1,f)
+	scribus.sentToLayer("textlayer", f)
 
-		# get description text for each distro
-		A = scribus.createText(left_page_x, 95, 120, 80)
-		scribus.setText(description, A)
-		scribus.setFont("Gentium Plus Compact Regular", A)
-		scribus.setTextAlignment(scribus.ALIGN_LEFT, A)
-		scribus.setFontSize(10, A)
-		scribus.sentToLayer("textlayer", A)
+	# get description text for each distro
+	A = scribus.createText(left_page_x, 95, 120, 80)
+	scribus.setText(description, A)
+	scribus.setFont("Gentium Plus Compact Regular", A)
+	scribus.setTextAlignment(scribus.ALIGN_LEFT, A)
+	scribus.setFontSize(10, A)
+	scribus.sentToLayer("textlayer", A)
 
-		placerandom(2)
-		placerandom_bars(3)
+	placerandom(2)
+	placerandom_bars(3)
 
-		metadata = """Modified packages: gnome-screensaver, gnome-border-control, awesome, plymouth-splash-screen
+	metadata = """Modified packages: gnome-screensaver, gnome-border-control, awesome, plymouth-splash-screen
 
 md5:
-alfdjflakjsdf203u2ofj2ojf2ojfj2o3jf2o3jo2j3f2o3j2f232
+alfdjflakjsdf203u2ofj2ojfj2o3jf2o3jo2j3f2o3j2f232
 
 filesize:
 200MB
-	"""
-		# show metadata for each distro
-		C = scribus.createText(left_page_x+150, 95, 60, 80)
-		scribus.setText(metadata, C)
-		scribus.setFont("Gentium Plus Compact Regular", C)
-		scribus.setTextAlignment(scribus.ALIGN_LEFT, C)
-		scribus.setFontSize(10, C)
-		scribus.sentToLayer("textlayer", C)
+"""
+	# show metadata for each distro
+	C = scribus.createText(left_page_x+150, 95, 60, 80)
+	scribus.setText(metadata, C)
+	scribus.setFont("Gentium Plus Compact Regular", C)
+	scribus.setTextAlignment(scribus.ALIGN_LEFT, C)
+	scribus.setFontSize(9, C)
+	scribus.sentToLayer("textlayer", C)
 
-		# create new page
-		scribus.newPage(-1)
-		setbleeds()
+	# create new page
+	scribus.newPage(-1)
+	setbleeds()
 
-		# load images into page
-		imagedir = "./screenshots/"
-		f = scribus.createImage(left_page_x, 23, 213, 152)
-		if os.path.isfile(imagedir + distro + ".png"):
-			scribus.loadImage(imagedir + distro + ".png", f)
-		else:
-			scribus.loadImage(imagedir + "test.jpg", f)
-		scribus.setScaleImageToFrame(1,1,f)
+	# load images into page
+	imagedir = "./screenshots/"
+	f = scribus.createImage(left_page_x, 23, 213, 133)
+	if os.path.isfile(imagedir + distro + ".png"):
+		scribus.loadImage(imagedir + distro + ".png", f)
+	else:
+		scribus.loadImage(imagedir + "default.png", f)
+	scribus.setScaleImageToFrame(1,1,f)
 
 
 # final // save doc && export PDF
