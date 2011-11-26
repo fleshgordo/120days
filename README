@@ -4,15 +4,15 @@ DESC   This script will generate the publication of the "the 120days of *buntu" 
 URL    www.120buntu.com
 
 **************** instructions ******************
-*																							 *
-* start inkscape															 *
-* execute python file from Script / Execute		 *
-* chose parse120buntu.py and hit 'ok'					 *
-* scribus auto-generates the PDF book					 *
-* send to your local publisher								 *
-*																							 *
-* texts are taken from 120buntu.com RSS feed	 *
-*																							 *
+*                                              *
+* start inkscape                               *
+* execute python file from Script / Execute    *
+* chose parse120buntu.py and hit 'ok'          *
+* scribus auto-generates the PDF book          *
+* send to your local publisher                 *
+*                                              *
+* texts are taken from 120buntu.com RSS feed   *
+*                                              *
 ************************************************
 *                                              *
 *          :::::    ::::::::   ::::::::        *
