@@ -1,0 +1,28 @@
+DATE   Created 2011-09-18
+CREATE frescogamba, k0a1a
+DESC   This script will generate the publication of the infamous "the 120days of *buntu" project
+URL    www.120buntu.com
+
+run inkscape and execute python file from Script / Exectute Script
+it will auto-generate our PDF print-on-demand book
+
+texts are taken from 120buntu.com RSS feed
+
+************************************************
+*                                              *
+*          :::::    ::::::::   ::::::::        *
+*           :+:    :+:    :+: :+:    :+:       *
+*           +:+    +:+        +:+    +:+       *
+*           +#+    +#++:++#++ +#+    +:+       *
+*           +#+           +#+ +#+    +#+       *
+*           #+#    #+#    #+# #+#    #+#       *
+*           ####   #########   #######         *
+*        :+:+:   :+:    :+:  :+:   :+:         *
+*         +:+         +:+   +:+   +:+          *
+*        +#+       +#+     +#+   +:+           *
+*       +#+     +#+       +#+   +#+            *
+*      #+#    #+#        #+#   #+#             * 
+*   ####### ##########   #######               *
+*                                              *
+************************************************
+
