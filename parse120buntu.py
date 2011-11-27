@@ -40,10 +40,14 @@ def getdistrofeed(distroamount):
 		# remove all links and remove all img tags
 		content = re.sub('<a href=".*</a>', "", content)
 		content = re.sub('<img.*/>', "", content)
-		content = re.sub('<p></p>', "", content)
-		content = re.sub('<br />', "\n", content)
-		content = re.sub('<br>', "\n", content)
-		content = re.sub('^\s+$|\n', "", content)
+		content = re.sub('<p>', "", content)
+		content = re.sub('</p>', "\n", content)
+		content = re.sub('<br />', "", content)
+		content = re.sub('<br>', "", content)
+		content = re.sub('<em>', "", content)
+		content = re.sub('</em>', "", content)
+#		content = re.sub('^\s+$|', "", content)
+		print content 
 		title = post.title
 		content = decode_unicode_references(content)
 		entries = []
@@ -51,7 +55,7 @@ def getdistrofeed(distroamount):
 		entries.append(post.filesizeiso)
 		entries.append(post.md5sum)
 		entries.append(post.modified)
-		print entries
+#print entries
 		distros[title] = entries
 		if enough > distroamount:
 			break
