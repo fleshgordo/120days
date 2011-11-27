@@ -10,7 +10,7 @@ DISTRO parse120buntu.sla
 
 **************** instructions ******************
 *                                              *
-* start inkscape                               *
+* start scribus                                *
 * execute python file from Script / Execute    *
 * chose parse120buntu.py and hit 'ok'          *
 * scribus auto-generates the PDF book          *
