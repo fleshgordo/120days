@@ -8,9 +8,9 @@ import random
 # general page layouts
 ####################################################################################
 left_page_x = 12
-document_width = 231.8
-document_height = 184.2
-document_margin = 3
+document_width = 234.95
+document_height = 184.15
+document_margin = 3.175
 
 def remove_html_tags(data):
 	p = re.compile(r'<.*?>')
@@ -35,17 +35,24 @@ def getdistrofeed(distroamount):
 	l = len(f)
 	distros = {}
 	enough=0
-
 	for post in f:
 		content = post.summary
 		# remove all links and remove all img tags
 		content = re.sub('<a href=".*</a>', "", content)
 		content = re.sub('<img.*/>', "", content)
 		content = re.sub('<p></p>', "", content)
+		content = re.sub('<br />', "\n", content)
+		content = re.sub('<br>', "\n", content)
 		content = re.sub('^\s+$|\n', "", content)
 		title = post.title
 		content = decode_unicode_references(content)
-		distros[title] = remove_html_tags(content)
+		entries = []
+		entries.append(remove_html_tags(content))
+		entries.append(post.filesizeiso)
+		entries.append(post.md5sum)
+		entries.append(post.modified)
+		print entries
+		distros[title] = entries
 #"<div id=" + title + ">" + content +"</div>"
 		if enough > distroamount:
 			break
@@ -107,7 +114,7 @@ def placerandom_bars(iteration):
 ####################################################################################
 # load RSS feed into dictionary
 ####################################################################################
-distros = getdistrofeed(19)
+distros = getdistrofeed(4444)
 
 ####################################################################################
 # create new document (landscape) 
@@ -128,7 +135,11 @@ if scribus.newDocument((document_width,document_height), (document_margin,docume
 
 
 for distro in distros:
-	description = distros[distro]
+	description = distros[distro][0]
+	filesizeiso = distros[distro][1]
+	md5sum = distros[distro][2]
+	modified = distros[distro][3]
+
 	# create new page && set bleeds
 	scribus.newPage(-1)
 	setbleeds()
@@ -159,15 +170,9 @@ for distro in distros:
 	placerandom(2)
 	placerandom_bars(3)
 
-	metadata = """Modified packages: gnome-screensaver, gnome-border-control, awesome, plymouth-splash-screen
+	metadata = "Modified packages:\n" + modified + "\n\nmd5:\n" + md5sum + "\n\nfilesize:\n" + filesizeiso + ""
 
-md5:
-alfdjflakjsdf203u2ofj2ojfj2o3jf2o3jo2j3f2o3j2f232
-
-filesize:
-200MB
-"""
-	# show metadata for each distro
+# show metadata for each distro
 	C = scribus.createText(left_page_x+150, 95, 60, 80)
 	scribus.setText(metadata, C)
 	scribus.setFont("Gentium Plus Compact Regular", C)
