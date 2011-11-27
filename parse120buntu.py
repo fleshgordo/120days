@@ -26,7 +26,7 @@ def _callback(matches):
 	except:
 		return id
 ####################################################################################
-# get custom RSS feed and create a dictionary of {'distroname':'description'} 
+# get custom RSS feed and create a dictionary of {'distroname':'metadata[]'} 
 ####################################################################################
 def getdistrofeed(distroamount):
 	python_wiki_rss_url = "http://120buntu.com/wp/?feed=rss2&cat=6"
@@ -53,7 +53,6 @@ def getdistrofeed(distroamount):
 		entries.append(post.modified)
 		print entries
 		distros[title] = entries
-#"<div id=" + title + ">" + content +"</div>"
 		if enough > distroamount:
 			break
 		enough+=1
@@ -63,8 +62,8 @@ def getdistrofeed(distroamount):
 # create 3mm bleed markers on every page
 ####################################################################################
 def setbleeds():
-	scribus.setHGuides([3,228.8])
-	scribus.setVGuides([3,181.2])
+	scribus.setHGuides([document_margin,document_width-document_margin])
+	scribus.setVGuides([document_margin,document_height-document_margin])
 
 
 ####################################################################################
