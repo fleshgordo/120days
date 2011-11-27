@@ -3,6 +3,11 @@ CREATE frescogamba, k0a1a
 DESC   This script will generate the publication of the "the 120days of *buntu" project
 URL    www.120buntu.com
 
+FILES
+COVER  cover.sla
+INTRO  intro_editorial.sla
+DISTRO parse120buntu.sla
+
 **************** instructions ******************
 *                                              *
 * start inkscape                               *
