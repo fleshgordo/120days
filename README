@@ -9,6 +9,10 @@ INTRO  intro_editorial.sla
 DISTRO parse120buntu.sla
 OUTRO  outro.sla
 
+for final publish release, run from commandline:
+
+# pdftk intro_editorial.pdf parse120buntu.pdf outro.pdf cat output final.pdf
+
 **************** instructions ******************
 *                                              *
 * start scribus                                *
