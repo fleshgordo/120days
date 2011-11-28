@@ -118,13 +118,13 @@ def placerandom_bars(iteration):
 ####################################################################################
 # load RSS feed into dictionary
 ####################################################################################
-distros = getdistrofeed(4444)
+distros = getdistrofeed(4)
 
 ####################################################################################
 # create new document (landscape) 
 ####################################################################################
 
-if scribus.newDocument((document_width,document_height), (document_margin,document_margin,document_margin,document_margin), scribus.PORTRAIT, 1, scribus.UNIT_MILLIMETERS, scribus.PAGE_2, 2, 1):
+if scribus.newDocument((document_width,document_height), (document_margin,document_margin,document_margin,document_margin), scribus.PORTRAIT, 1, scribus.UNIT_MILLIMETERS, scribus.PAGE_2, 0, 1):
 
  	# create some layers; so objects appear front/background
 	scribus.createLayer("randombars")
@@ -138,9 +138,6 @@ for distro in distros:
 	md5sum = distros[distro][2]
 	modified = distros[distro][3]
 
-	# create new page && set bleeds
-	scribus.newPage(-1)
-	setbleeds()
 
 	# create page title/header
 	B = scribus.createText(left_page_x, 10, 100, 10)
@@ -190,6 +187,10 @@ for distro in distros:
 	else:
 		scribus.loadImage(imagedir + "default.png", f)
 	scribus.setScaleImageToFrame(1,1,f)
+	
+# create new page && set bleeds
+	scribus.newPage(-1)
+	setbleeds()
 
 
 # final // save doc && export PDF
