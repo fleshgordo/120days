@@ -124,13 +124,7 @@ distros = getdistrofeed(4444)
 # create new document (landscape) 
 ####################################################################################
 
-if scribus.newDocument((document_width,document_height), (document_margin,document_margin,document_margin,document_margin), scribus.PORTRAIT, 1, scribus.UNIT_MILLIMETERS, scribus.PAGE_2, 1, 1):
-	# create front page
-	B = scribus.createText(left_page_x, 10, 200, 100)
-	scribus.setFont("Gentium Plus Compact Regular", B)
-	scribus.setText("front cover", B)
-	scribus.setTextAlignment(scribus.ALIGN_LEFT, B)
-	scribus.setFontSize(40, B)
+if scribus.newDocument((document_width,document_height), (document_margin,document_margin,document_margin,document_margin), scribus.PORTRAIT, 1, scribus.UNIT_MILLIMETERS, scribus.PAGE_2, 2, 1):
 
  	# create some layers; so objects appear front/background
 	scribus.createLayer("randombars")
@@ -190,7 +184,7 @@ for distro in distros:
 
 	# load images into page
 	imagedir = "./screenshots/"
-	f = scribus.createImage(left_page_x, 23, 213, 133)
+	f = scribus.createImage(left_page_x, 10, 210, 157.5)
 	if os.path.isfile(imagedir + distro + ".png"):
 		scribus.loadImage(imagedir + distro + ".png", f)
 	else:
