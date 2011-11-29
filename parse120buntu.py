@@ -4,6 +4,8 @@ import scribus
 import random
 #from BeautifulSoup import BeautifulSoup
 
+
+
 ####################################################################################
 # general page layouts
 ####################################################################################
@@ -11,12 +13,13 @@ left_page_x = 12
 document_width = 234.95
 document_height = 184.15
 document_margin = 3.175
+####################################################################################
 
 def remove_html_tags(data):
 	p = re.compile(r'<.*?>')
 	return p.sub('', data)
 
-
+# function for converting html special characters into unicde
 def decode_unicode_references(data):
 	return re.sub("&#(\d+)(;|(?=\s))", _callback, data)
 def _callback(matches):
@@ -25,6 +28,7 @@ def _callback(matches):
 		return unichr(int(id))
 	except:
 		return id
+
 ####################################################################################
 # get custom RSS feed and create a dictionary of {'distroname':'metadata[]'} 
 ####################################################################################
@@ -43,12 +47,13 @@ def getdistrofeed(distroamount):
 		content = re.sub('^\s+$|\n', "", content)
 		content = re.sub('<p>', "", content)
 		content = re.sub('^</p>', "", content)
-		content = re.sub('</p><strong>', "\n\n<strong>", content)
-		content = re.sub('</p>', "\n", content)
 		content = re.sub('<br />', "", content)
 		content = re.sub('<br>', "", content)
 		content = re.sub('<em>', "", content)
 		content = re.sub('</em>', "", content)
+		# replace <br > with linebreaks
+		content = re.sub('</p><strong>', "\n\n<strong>", content)
+		content = re.sub('</p>', "\n", content)
 		title = post.title
 		content = decode_unicode_references(content)
 		entries = []
@@ -56,7 +61,6 @@ def getdistrofeed(distroamount):
 		entries.append(post.filesizeiso)
 		entries.append(post.md5sum)
 		entries.append(post.modified)
-#print entries
 		distros[title] = entries
 		if enough > distroamount:
 			break
@@ -69,6 +73,11 @@ def getdistrofeed(distroamount):
 def setbleeds():
 	scribus.setHGuides([document_margin,document_width-document_margin])
 	scribus.setVGuides([document_margin,document_height-document_margin])
+
+####################################################################################
+# load RSS feed into dictionary // change number for amount of distros
+####################################################################################
+distros = getdistrofeed(19)
 
 
 ####################################################################################
@@ -113,13 +122,6 @@ def placerandom_bars(iteration):
 		scribus.rotateObject(random_degree, bars)
 		scribus.sentToLayer("randombars", bars)
 
-
-
-####################################################################################
-# load RSS feed into dictionary
-####################################################################################
-distros = getdistrofeed(19)
-
 ####################################################################################
 # create new document (landscape) 
 ####################################################################################
@@ -133,19 +135,18 @@ if scribus.newDocument((document_width,document_height), (document_margin,docume
 
 
 for distro in distros:
+	# extract the dictionary content
 	description = distros[distro][0]
 	filesizeiso = distros[distro][1]
 	md5sum = distros[distro][2]
 	modified = distros[distro][3]
 
-
 	# create page title/header
 	B = scribus.createText(left_page_x, 10, 100, 10)
-	scribus.setFont("Gentium Plus Compact Regular", B)
 	scribus.setText(distro, B)
+	scribus.setFont("Gentium Plus Compact Regular", B)
 	scribus.setTextAlignment(scribus.ALIGN_LEFT, B)
 	scribus.setFontSize(18, B)
-	scribus.sentToLayer("textlayer", B)
 	
 	# load small-logo into page
 	imagedir = "./logos/"
@@ -155,21 +156,26 @@ for distro in distros:
 	scribus.sentToLayer("textlayer", f)
 
 	# get description text for each distro
-	A = scribus.createText(left_page_x, 95, 120, 80)
-	scribus.setText(description, A)
-	scribus.setFont("Gentium Plus Compact Regular", A)
-	scribus.setTextAlignment(scribus.ALIGN_LEFT, A)
-	scribus.setFontSize(10, A)
-	scribus.sentToLayer("textlayer", A)
+	scribus.createText(left_page_x, 95, 120, 80,distro)
+	scribus.setText(description, distro)
+	scribus.setLineSpacing(12,distro)
+	linespacing = scribus.getLineSpacing(distro)
+#scribus.setText(str(linespacing), distro)
+	scribus.setFont("Gentium Plus Compact Regular", distro)
+	scribus.setTextAlignment(scribus.ALIGN_LEFT, distro)
+	scribus.setFontSize(10, distro)
+	scribus.sentToLayer("textlayer", distro)
 
+	# place some background stuff
 	placerandom(2)
 	placerandom_bars(3)
 
 	metadata = "Modified packages:\n" + modified + "\n\nmd5:\n" + md5sum + "\n\nfilesize:\n" + filesizeiso + ""
 
-# show metadata for each distro
+	# show metadata for each distro
 	C = scribus.createText(left_page_x+150, 95, 60, 80)
 	scribus.setText(metadata, C)
+	scribus.setLineSpacing(12,C)
 	scribus.setFont("Gentium Plus Compact Regular", C)
 	scribus.setTextAlignment(scribus.ALIGN_LEFT, C)
 	scribus.setFontSize(9, C)
@@ -179,7 +185,7 @@ for distro in distros:
 	scribus.newPage(-1)
 	setbleeds()
 
-	# load images into page
+	# load screenshots into page
 	imagedir = "./screenshots/"
 	f = scribus.createImage(left_page_x, 10, 210, 157.5)
 	if os.path.isfile(imagedir + distro + ".png"):
@@ -187,8 +193,17 @@ for distro in distros:
 	else:
 		scribus.loadImage(imagedir + "default.png", f)
 	scribus.setScaleImageToFrame(1,1,f)
-	
-# create new page && set bleeds
+
+	# show metadata for each distro
+	caption = scribus.createText(157, 170.5, 65, 10)
+	captiontext = distro + ", screenshot 800x600px"
+	scribus.setText(captiontext, caption)
+	scribus.setFont("Gentium Plus Compact Regular", caption)
+	scribus.setTextAlignment(scribus.ALIGN_RIGHT, caption)
+	scribus.setFontSize(9, caption)
+	scribus.sentToLayer("textlayer", caption)
+
+	# create new page && set bleeds
 	scribus.newPage(-1)
 	setbleeds()
 
@@ -196,7 +211,3 @@ for distro in distros:
 # final // save doc && export PDF
 #scribus.saveDoc()
 #scribus.closeDoc()
-#for key, value in sorted(distros.iteritems(), key=lambda (k,v): (v,k)):
-#	print "DISTRO: %s:" % (key)
-#	print "VALUE: %s:" % (value)
-#	print
