@@ -10,9 +10,9 @@ import random
 # general page layouts
 ####################################################################################
 left_page_x = 12
-document_width = 234.95
-document_height = 184.15
-document_margin = 3.175
+document_width =  228.6
+document_height = 177.8
+document_margin = 12.7
 ####################################################################################
 
 def remove_html_tags(data):
@@ -128,6 +128,7 @@ def placerandom_bars(iteration):
 
 if scribus.newDocument((document_width,document_height), (document_margin,document_margin,document_margin,document_margin), scribus.PORTRAIT, 1, scribus.UNIT_MILLIMETERS, scribus.PAGE_2, 0, 1):
 
+	scribus.setMargins(0,6.35,3.175,3.175)
  	# create some layers; so objects appear front/background
 	scribus.createLayer("randombars")
 	scribus.createLayer("randomcircles")
@@ -158,7 +159,7 @@ for distro in sorted(distros.iterkeys()):
 	scribus.sentToLayer("textlayer", f)
 
 	# get description text for each distro
-	scribus.createText(left_page_x, 95, 120, 80,distro)
+	scribus.createText(left_page_x, 92, 120, 80,distro)
 	scribus.setText(description, distro)
 	scribus.setLineSpacing(12,distro)
 	linespacing = scribus.getLineSpacing(distro)
@@ -171,7 +172,7 @@ for distro in sorted(distros.iterkeys()):
 	placerandom(2)
 	placerandom_bars(3)
 
-	metadata = "Modified packages:\n" + modified + "\n\nmd5:\n" + md5sum + "\n\nfilesize:\n" + filesizeiso + ""
+	metadata = "Modification type:\n" + modified + "\n\nmd5:\n" + md5sum + "\n\nfilesize:\n" + filesizeiso + ""
 
 	# show metadata for each distro
 	C = scribus.createText(left_page_x+150, 95, 60, 80)
@@ -188,7 +189,7 @@ for distro in sorted(distros.iterkeys()):
 
 	# load screenshots into page
 	imagedir = "./screenshots/"
-	f = scribus.createImage(left_page_x, 10, 210, 157.5)
+	f = scribus.createImage(12.3, 11, 204, 153)
 	if os.path.isfile(imagedir + distro + ".png"):
 		scribus.loadImage(imagedir + distro + ".png", f)
 	else:
@@ -196,7 +197,7 @@ for distro in sorted(distros.iterkeys()):
 	scribus.setScaleImageToFrame(1,1,f)
 
 	# show metadata for each distro
-	caption = scribus.createText(157, 170.5, 65, 10)
+	caption = scribus.createText(151.5, 165, 65, 10)
 	captiontext = distro + ", screenshot 800x600px"
 	scribus.setText(captiontext, caption)
 	scribus.setFont("Gentium Plus Compact Regular", caption)
