@@ -175,7 +175,7 @@ for distro in sorted(distros.iterkeys()):
 	metadata = "Modification type:\n" + modified + "\n\nmd5:\n" + md5sum + "\n\nfilesize:\n" + filesizeiso + ""
 
 	# show metadata for each distro
-	C = scribus.createText(left_page_x+150, 95, 60, 80)
+	C = scribus.createText(left_page_x+150, 92, 60, 80)
 	scribus.setText(metadata, C)
 	scribus.setLineSpacing(12,C)
 	scribus.setFont("Gentium Plus Compact Regular", C)
