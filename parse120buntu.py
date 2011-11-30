@@ -78,7 +78,7 @@ def setbleeds():
 # load RSS feed into dictionary // change number for amount of distros
 ####################################################################################
 distros = getdistrofeed(19)
-
+distros
 
 ####################################################################################
 # create random elements (ubuntu bar/circles) for background
@@ -134,7 +134,9 @@ if scribus.newDocument((document_width,document_height), (document_margin,docume
 	scribus.createLayer("textlayer")
 
 
-for distro in distros:
+distros.keys().sort()
+
+for distro in sorted(distros.iterkeys()):
 	# extract the dictionary content
 	description = distros[distro][0]
 	filesizeiso = distros[distro][1]
@@ -160,7 +162,6 @@ for distro in distros:
 	scribus.setText(description, distro)
 	scribus.setLineSpacing(12,distro)
 	linespacing = scribus.getLineSpacing(distro)
-#scribus.setText(str(linespacing), distro)
 	scribus.setFont("Gentium Plus Compact Regular", distro)
 	scribus.setTextAlignment(scribus.ALIGN_LEFT, distro)
 	scribus.setFontSize(10, distro)
