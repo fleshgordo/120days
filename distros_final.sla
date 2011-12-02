@@ -30,7 +30,6 @@
             <Tabs Type="0" Pos="16" Fill=""/>
         </STYLE>
         <CHARSTYLE CNAME="Default Character Style" DefaultStyle="1" FONT="Gentium Plus Compact Regular" FONTSIZE="10" FEATURES="inherit" FCOLOR="Black" FSHADE="100" SCOLOR="Black" SSHADE="100" TXTSHX="5" TXTSHY="-5" TXTOUT="1" TXTULP="-0.1" TXTULW="-0.1" TXTSTP="-0.1" TXTSTW="-0.1" SCALEH="100" SCALEV="100" BASEO="0" KERN="0" LANGUAGE="English"/>
-        <CHARSTYLE FONT="Gentium Plus Compact Regular" FONTSIZE="10" FEATURES="inherit" FCOLOR="Black" FSHADE="100" SCOLOR="Black" SSHADE="100" TXTSHX="5" TXTSHY="-5" TXTOUT="1" TXTULP="-0.1" TXTULW="-0.1" TXTSTP="-0.1" TXTSTW="-0.1" SCALEH="100" SCALEV="100" BASEO="0" KERN="0" LANGUAGE="English"/>
         <LAYERS NUMMER="0" LEVEL="0" NAME="Background" SICHTBAR="1" DRUCKEN="1" EDIT="1" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#000000"/>
         <LAYERS NUMMER="1" LEVEL="1" NAME="randombars" SICHTBAR="1" DRUCKEN="1" EDIT="1" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#ff0000"/>
         <LAYERS NUMMER="2" LEVEL="2" NAME="randomcircles" SICHTBAR="1" DRUCKEN="1" EDIT="1" FLOW="1" TRANS="1" BLEND="0" OUTL="0" LAYERC="#00ff00"/>
@@ -201,8 +200,9 @@
             <para ALIGN="0" LINESP="12"/>
             <para ALIGN="0" LINESP="12"/>
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="9" CH="md5:"/>
+            <ITEXT CH=" "/>
             <para ALIGN="0" LINESP="12"/>
-            <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="9" CH="n/a"/>
+            <ITEXT CH="9f7f320f4ed7d2337c490f5a40c1d37a"/>
             <para ALIGN="0" LINESP="12"/>
             <para ALIGN="0" LINESP="12"/>
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="9" CH="filesize:"/>
@@ -744,9 +744,7 @@
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="For moments when you feel like doing nothing, Procrastinationbuntu can help you archive it to the fullest potential. All useless and unnecessary things that one can do behind a computer are completely automated! You might even explore something new on Wikipedia or get in contact with a random person - all without having to move a finger."/>
             <para/>
             <para/>
-            <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="In some households, a computer running Procrastinationbuntu can even replace a TV!"/>
-            <para/>
-            <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="No need to spend money on expensive cable or be confronted with the choice of TV channels. Just run this system and watch your world unfold (and important tasks will fail ... tomorrow)!"/>
+            <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="In some households, a computer running Procrastinationbuntu can even replace a TV! No need to spend money on expensive cable or be confronted with the choice of TV channels. Just run this system and watch your world unfold (and important tasks will fail ... tomorrow)!"/>
             <trail/>
             <PageItemAttributes/>
         </PAGEOBJECT>
@@ -872,7 +870,7 @@
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="Rebuntu is an illustration of a system making decisions by  itself, committing to self-maintenance and self-destruction. The system  is continuously reloading a copy of itself within itself  until the memory runs out. When no free memory is left the system needs  to decide which one of the copies of itself it shall kill in order to  reproduce itself again, again and again…"/>
             <para ALIGN="0" LINESP="12"/>
             <para ALIGN="0" LINESP="12"/>
-            <ITEXT FONT="Gentium Plus Compact Italic" FONTSIZE="10" CH="- He’s not any kind of program, Sark. He’s a User!"/>
+            <ITEXT FONT="Gentium Plus Compact Italic" FONTSIZE="10" CH="               - He’s not any kind of program, Sark. He’s a User!"/>
             <para ALIGN="0" LINESP="12"/>
             <para ALIGN="0" LINESP="12"/>
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="Rebuntu is an OS intervention. Its rather ironic tone sets an accent on the fact that machines and Operating Systems are  incapable of “rational” or “human-like” thinking and thus shall not be ultimately relied on."/>
