@@ -870,8 +870,8 @@
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="Rebuntu is an illustration of a system making decisions by  itself, committing to self-maintenance and self-destruction. The system  is continuously reloading a copy of itself within itself  until the memory runs out. When no free memory is left the system needs  to decide which one of the copies of itself it shall kill in order to  reproduce itself again, again and again…"/>
             <para ALIGN="0" LINESP="12"/>
             <para ALIGN="0" LINESP="12"/>
-            <ITEXT FONT="Gentium Plus Compact Italic" FONTSIZE="10" CH="               - He’s not any kind of program, Sark. He’s a User!"/>
-            <para ALIGN="0" LINESP="12"/>
+            <ITEXT FONT="Gentium Plus Compact Italic" CH="               - He’s not any kind of program, Sark. He’s a User!"/>
+            <para/>
             <para ALIGN="0" LINESP="12"/>
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="Rebuntu is an OS intervention. Its rather ironic tone sets an accent on the fact that machines and Operating Systems are  incapable of “rational” or “human-like” thinking and thus shall not be ultimately relied on."/>
             <para ALIGN="0" LINESP="12"/>
@@ -1365,9 +1365,9 @@
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="Dadabuntu follows the route laid down by Hugo Ball, Tristan Tzara, Johannes Baadel, Marcel Duchamp and others involved into anti-art, anti-bourgeois and otherwise anarchistic movement of Dadaism. Dadabuntu is an anti-OS OS – by all means, it liberates its user from the burden of modern-life computing. Dadabuntu provides an ultimate data abstraction concluded in the absence of any data. It is an abstraction superior to any other possible abstraction. Dadabuntu removes meaningless and ridicules any information that is not a boolean zero. The new surface provided by a ground zero is the ultimate beginning of true data."/>
             <para ALIGN="0" LINESP="12"/>
             <para PARENT="footnotes"/>
-            <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="       "/>
-            <ITEXT FONT="Gentium Book Basic Italic" FONTSIZE="10" CH=" Your Data is D"/>
-            <ITEXT FONT="Gentium Book Basic Italic" CH="ADA!"/>
+            <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="      "/>
+            <ITEXT FONT="Gentium Plus Compact Italic" FONTSIZE="10" CH="      - Your Data is D"/>
+            <ITEXT FONT="Gentium Plus Compact Italic" CH="ADA!"/>
             <para ALIGN="0" LINESP="12"/>
             <para PARENT="footnotes"/>
             <ITEXT FONT="Gentium Plus Compact Regular" FONTSIZE="10" CH="Once the installation process has begun it won’t end until Dadabuntu had completely wiped out any information stored in the computer. It fills any writable medium found to be attached with zeros – hard disks, USB-sticks, RW-CD/DVD/BR, ZIP-disks, magnetic disks or tapes and even reusable punch-cards – all storage mediums will be reset to their once original factory state of an absolute zero. Dadabuntu is very useful if you would like to sell an old computer or hard disk without risking your privacy and exposure of personal data. Once installed, Dadabuntu removes any information including all personal traces ever contained on a storage medium."/>
