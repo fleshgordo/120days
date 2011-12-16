@@ -33,7 +33,7 @@ def _callback(matches):
 # get custom RSS feed and create a dictionary of {'distroname':'metadata[]'} 
 ####################################################################################
 def getdistrofeed(distroamount):
-	python_wiki_rss_url = "http://120buntu.com/wp/?feed=rss2&cat=6"
+	python_wiki_rss_url = "http://120buntu.com/?feed=rss2&cat=6"
 	feed = feedparser.parse(python_wiki_rss_url)	
 	f = feed['entries']
 	l = len(f)
