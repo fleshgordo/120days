@@ -11,7 +11,7 @@ OUTRO  outro.sla
 
 for final publish release, run from commandline:
 
-# pdftk intro_editorial.pdf parse120buntu.pdf outro.pdf cat output final.pdf
+#pdftk intro_editorial_scribus14.pdf distros_final.pdf outro.pdf cat output output.pdf
 
 **************** instructions ******************
 *                                              *
